@@ -1,0 +1,15 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: igreja-deus-e-a-gloria-landing
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/health || exit 1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
